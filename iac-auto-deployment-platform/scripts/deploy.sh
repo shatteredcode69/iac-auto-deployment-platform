@@ -1,24 +1,20 @@
 #!/bin/bash
 
-set -e  # Exit immediately if a command fails
+set -e
 
 echo "🚀 Starting deployment..."
 
-# Navigate to terraform directory
-cd terraform
+# Move to project root (one level up from scripts)
+cd "$(dirname "$0")/.."
 
 echo "📦 Initializing Terraform..."
+cd terraform
 terraform init -input=false
 
 echo "🏗 Applying Terraform configuration..."
 terraform apply -auto-approve
 
-echo "🔍 Fetching application URL..."
-
-# Since we are mapping port 3000 locally
-APP_URL="http://localhost:3000"
-
 echo ""
 echo "✅ Deployment successful!"
-echo "🌐 Application is live at: $APP_URL"
+echo "🌐 Application is live at: http://localhost:3000"
 echo ""
