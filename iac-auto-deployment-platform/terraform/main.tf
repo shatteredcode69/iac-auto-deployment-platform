@@ -27,7 +27,8 @@ resource "docker_image" "app_image" {
 ############################################
 resource "docker_container" "app_container" {
   name  = "app-container"
-  image = docker_image.app_image.latest
+  image = docker_image.app_image.image_id
+
 
   ports {
     internal = 3000
@@ -36,3 +37,4 @@ resource "docker_container" "app_container" {
 
   restart = "unless-stopped"
 }
+
