@@ -19,7 +19,12 @@ provider "docker" {}
 # Docker Image
 ############################################
 resource "docker_image" "app_image" {
-  name = "node:18-alpine"
+  name = "iac-app:latest"
+
+  build {
+    context    = "${path.module}/../app"
+    dockerfile = "Dockerfile"
+  }
 }
 
 ############################################
@@ -37,4 +42,5 @@ resource "docker_container" "app_container" {
 
   restart = "unless-stopped"
 }
+
 
